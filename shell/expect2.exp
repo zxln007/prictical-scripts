@@ -1,0 +1,18 @@
+#!/usr/bin/expect
+set ip [lindex $argv 0]
+set user [lindex $argv 1]
+set passwd [lindex $argv 2]
+set cmd [lindex $argv 3]
+if { $argc != 4 } {
+    puts "Usage: expect login.exp ip user passwd"
+    exit 1
+}
+set timeout 30
+spawn ssh $user@$ip
+expect {
+    "(yes/no)" {send "yes\r"; exp_continue}
+    "password:" {send "$passwd\r"}
+}
+expect "$user@*" {send "$cmd\r"}
+expect "$user@*" {send "exit\r"}
+expect eof

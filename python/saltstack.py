@@ -3,13 +3,13 @@
 import requests
 import json
 import copy
-class SaltApi:
+class SaltApi():
     """
     定义salt api接口的类
     初始化获得token
     """
-    def __init__(self):
-        self.url = "http://172.85.10.21:8000/"
+    def __init__(url,self):
+        self.url = url
         self.username = "saltapi"
         self.password = "saltapi"
         self.headers = {"Content-type": "application/json"}
